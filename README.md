@@ -1,8 +1,8 @@
 # llmwiki-skill
 
-An Agent Skill for source-first academic paper ingestion into a personal Markdown wiki.
+An Agent Skill for querying a personal Markdown wiki and archiving academic papers.
 
-This public repository contains only reusable instructions and a note template. It contains no personal wiki, papers, credentials, or private research notes. The initial scope is paper ingestion and archive validation, not general life-record management.
+This public repository contains only reusable instructions and a note template. It contains no personal wiki, papers, credentials, or private research notes. Queries start from index summaries and consult original assets for details the summaries do not cover. Paper ingestion and archive validation are additional workflows.
 
 ## Install
 
@@ -30,6 +30,7 @@ Do not overwrite an existing skill installation. Restart/reload your agent after
 In pi:
 
 ```text
+/skill:llmwiki What does /path/to/my-wiki say about <topic>?
 /skill:llmwiki Ingest https://arxiv.org/abs/<id> into /path/to/my-wiki under topic <topic>.
 ```
 
@@ -37,35 +38,18 @@ Always supply the target wiki path when it is not clear from the workspace. Inst
 
 ## Archive Layout
 
-```text
-wiki/research/<topic>/papers/<paper_slug>/
-  index.md
-  metadata.yaml
-  paper-pdf/
-    <original-paper-filename>.pdf
-  paper-tex/
-    archives/
-      <original-source-filename>
-    extracted/
-      <extraction-id>/
-        <original internal folders and files>
-  repo/
-    <original-repository-name>/
-  supplementary/                    # optional
-    <original-filename>
-```
-
-The extraction ID isolates each source package; internal directories are preserved unchanged. Downloads lacking a meaningful original filename get a documented derived name. Different content is never silently overwritten. Optional directories are created only when needed.
+The [protocol](skills/llmwiki/references/protocol.md#canonical-layout) is the sole directory-layout specification, including legacy-cache compatibility and migration rules.
 
 ## Core Rules
 
+- For questions, read index summaries first; consult linked original assets for missing details and cite the evidence used.
+- Ordinary queries do not change wiki content or trigger ingestion.
 - Read TeX/source first; inspect the official code as implementation evidence; use PDF for paper reading when source is unavailable or unusable.
 - Archive the PDF when available even if reading TeX.
 - Downloading, extracting, reading, and completing notes are different states.
 - Create formal `index.md` only after reading the paper. Track incomplete work in metadata.
 - Distinguish paper-reported results, code observations, local reproduction, and interpretation.
 - Update wiki navigation and append an operation log after ingestion.
-- Existing root PDFs and `source/` layouts remain usable; migration requires explicit authorization.
 - Never automatically execute downloaded code, delete original directories, or publish personal content.
 
 ## Package

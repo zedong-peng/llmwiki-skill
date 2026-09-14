@@ -2,25 +2,36 @@
 
 ## Canonical Layout
 
+This section is the sole directory-layout specification for the skill. Other documents refer here rather than defining another layout.
+
 ```text
-wiki/research/<topic>/papers/<paper_slug>/
+wiki/research/<topic>/
   index.md
-  metadata.yaml
-  paper-pdf/
-    <original-download-filename>.pdf
-  paper-tex/
-    archives/
-      <original-download-filename>
-    extracted/
-      <extraction-id>/
-        <original archive directory structure and filenames>
-  repo/
-    <original-repository-name>/
-  supplementary/
-    <original-download-filename>
+  threads/
+    *.md 存放想法、灵感、草稿、草图、临时记录等
+  assets/ 存放参考资料相关资产 参考资料可能是paper,blog,code等
+    <ref_slug>/
+      index.md
+      metadata.yaml
+      paper-pdf/
+        <original-download-filename>.pdf
+      paper-tex/
+        archives/
+          <original-download-filename>
+        extracted/
+          <extraction-id>/
+            <original archive directory structure and filenames>
+      github-repo/
+        <original-repository-name>/
+      supplementary/
+        <original-download-filename>
 ```
 
-`index.md` is the formal paper note, not a placeholder. `metadata.yaml` can exist before reading. Optional asset directories need not exist when no assets are available.
+The topic `index.md` summarizes the topic and links to its records and references. Each reference's `index.md` summarizes that reference and links to its original assets; for a paper, it is the formal paper note, not a placeholder. `metadata.yaml` can exist before reading. Optional asset directories need not exist when no assets are available. The ingestion and metadata contracts currently describe papers; other reference types can be consulted during wiki queries.
+
+The wiki operation log is `wiki/log.md`. Preserve existing navigation conventions rather than creating parallel indexes.
+
+Recognize legacy root PDFs and `source/{archives,extracted}` as usable caches. Do not redownload or move them merely to enforce the canonical layout. New entries use the layout above; migration requires explicit authorization.
 
 An extraction ID is an outer isolation directory, normally the archive filename with the complete recognized suffix removed (for example `.tar.gz`, `.tar`, `.tgz`, `.zip`, or `.gz`). Preserve every internal folder name, including the archive's own top-level directory. For archives without a top-level folder, files stay directly inside the isolation directory. Never flatten source trees or rename internal TeX files.
 
