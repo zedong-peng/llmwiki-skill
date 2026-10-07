@@ -29,9 +29,15 @@ wiki/research/<topic>/
 
 The topic `index.md` summarizes the topic and links to its records and references. Each reference's `index.md` summarizes that reference and links to its original assets; for a paper, it is the formal paper note, not a placeholder. `metadata.yaml` can exist before reading. Optional asset directories need not exist when no assets are available. The ingestion and metadata contracts currently describe papers; other reference types can be consulted during wiki queries.
 
-The wiki operation log is `wiki/log.md`. Preserve existing navigation conventions rather than creating parallel indexes.
+A topic directory holds only `index.md`, `threads/` and `assets/`. Do not add `papers/`, per-directory guide pages, `threads/index.md` or a second log; the topic `index.md` is the only catalog. A reference slug is unique across the whole wiki: when a paper fits two topics, keep one archive and link to it from the other topic.
 
-Recognize legacy root PDFs and `source/{archives,extracted}` as usable caches. Do not redownload or move them merely to enforce the canonical layout. New entries use the layout above; migration requires explicit authorization.
+The wiki operation log is the single file `wiki/log.md`, newest entry first. Preserve existing navigation conventions rather than creating parallel indexes.
+
+Page frontmatter `status` describes the page (`seed`, `active`, `stable`, `stale`). Ingest progress is recorded only in `metadata.yaml` (`ingest.status`, `reading.status`), never in the page status. Non-paper references (blogs, software releases) use a `reference:` block in place of `paper:` with the same `title`, `slug` and `topic` fields.
+
+Git policy for archived material: `paper-pdf/`, extracted TeX and notes are tracked; `paper-tex/archives/` and `github-repo/` are local caches, ignored by Git, and their identity is kept in `metadata.yaml` (SHA-256, URL, commit). A clone that lacks them reports warnings, not errors.
+
+Legacy layouts (`<topic>/papers/<slug>/` with root PDFs, `source/{archives,extracted}`, `repo/`) are usable caches and need not be redownloaded. Migrate them only with explicit authorization, using `scripts/migrate_legacy.py` (dry run by default). The script maps the legacy tree onto the canonical one, writes schema v1 metadata with the old fields preserved verbatim under `legacy:`, rewrites inbound links, and removes only loose files that are byte-identical to a file in `source/archives/`. Run it with `--caches-only` in a second clone after pulling a migrated commit to move untracked leftovers such as repository caches.
 
 An extraction ID is an outer isolation directory, normally the archive filename with the complete recognized suffix removed (for example `.tar.gz`, `.tar`, `.tgz`, `.zip`, or `.gz`). Preserve every internal folder name, including the archive's own top-level directory. For archives without a top-level folder, files stay directly inside the isolation directory. Never flatten source trees or rename internal TeX files.
 
@@ -65,6 +71,6 @@ If source is unavailable or unusable, record the reason and write `TeX unavailab
 
 `processed` means the paper was read, a substantive formal note was completed, metadata matches the evidence, and navigation/log updates and path checks were completed. Missing optional code or PDF assets may be documented exceptions; unread paper content is not.
 
-A validation pass checks file existence, hashes, relative paths, links, identifier/version consistency, repository commit and status bookkeeping. It cannot certify semantic reading or scientific correctness.
+A validation pass checks file existence, hashes, relative paths, links, identifier/version consistency, repository commit and status bookkeeping. `scripts/lint_wiki.py <wiki-root>` performs the mechanical part: layout, metadata contract, frontmatter, duplicate slugs, hashes and wikilinks. It cannot certify semantic reading or scientific correctness.
 
-Migration is a separate explicitly authorized task: inventory, detect conflicts, move assets, update metadata and inbound/outbound links, validate, and log. Never silently bulk-migrate legacy archives.
+Migration is a separate explicitly authorized task: dry run, review conflicts, test on a copy, apply, run the lint, and log. Never silently bulk-migrate legacy archives.

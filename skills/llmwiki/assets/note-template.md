@@ -3,7 +3,7 @@ title: "Paper title"
 domain: research
 area: topic-slug
 type: paper
-status: active
+status: active  # page status: seed | active | stable | stale; ingest progress goes in metadata.yaml
 updated: YYYY-MM-DD
 tags: [paper]
 ---

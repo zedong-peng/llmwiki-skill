@@ -48,6 +48,8 @@ extraction:
   error: null
 ```
 
+A migrated record may carry a top-level `legacy:` block holding the pre-migration fields unchanged. Leave it in place; do not read it as current state.
+
 For each repository, record URL, relative path, commit, branch, retrieval date, submodule status, inspection scope, and status (`pending`, `cached`, `inspected`, `unavailable`, or `failed`). Record execution/reproduction separately, defaulting to `not_run`.
 
 Reading status is `not_started`, `partial`, or `read`. Reading source is `tex` or `pdf`; repository inspection is supplemental evidence. Record which exact asset/version was read.

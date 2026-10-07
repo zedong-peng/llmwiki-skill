@@ -49,7 +49,7 @@ The [protocol](skills/llmwiki/references/protocol.md#canonical-layout) is the so
 - Downloading, extracting, reading, and completing notes are different states.
 - Create formal `index.md` only after reading the paper. Track incomplete work in metadata.
 - Distinguish paper-reported results, code observations, local reproduction, and interpretation.
-- Update wiki navigation and append an operation log after ingestion.
+- Update the topic index and add an entry to `wiki/log.md` after ingestion.
 - Never automatically execute downloaded code, delete original directories, or publish personal content.
 
 ## Package
@@ -58,8 +58,14 @@ The [protocol](skills/llmwiki/references/protocol.md#canonical-layout) is the so
 - [Archive and ingestion protocol](skills/llmwiki/references/protocol.md)
 - [Metadata contract](skills/llmwiki/references/metadata.md)
 - [Note template](skills/llmwiki/assets/note-template.md)
+- [Scripts](skills/llmwiki/scripts/)
 
-This first release is instruction-only. The agent uses its available download, filesystem, parser, and inspection tools. No automated downloader, extractor, or semantic-reading validator is included. Safe archive extraction is a requirement of the workflow, not an implemented utility in this package.
+The agent uses its own download, filesystem, parser, and inspection tools. Two helper scripts need Python 3 and PyYAML:
+
+- [`scripts/lint_wiki.py`](skills/llmwiki/scripts/lint_wiki.py) checks layout, metadata, frontmatter, hashes, duplicate slugs and wikilinks.
+- [`scripts/migrate_legacy.py`](skills/llmwiki/scripts/migrate_legacy.py) moves a legacy `papers/` tree to the canonical layout (dry run by default).
+
+There is no downloader, extractor, or semantic-reading validator; safe archive extraction is a requirement of the workflow, not an implemented utility.
 
 ## License
 
