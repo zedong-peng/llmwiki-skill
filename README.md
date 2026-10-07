@@ -60,12 +60,13 @@ The [protocol](skills/llmwiki/references/protocol.md#canonical-layout) is the so
 - [Note template](skills/llmwiki/assets/note-template.md)
 - [Scripts](skills/llmwiki/scripts/)
 
-The agent uses its own download, filesystem, parser, and inspection tools. Two helper scripts need Python 3 and PyYAML:
+The agent uses its own download, filesystem, parser, and inspection tools. Helper scripts need Python 3 and PyYAML:
 
 - [`scripts/lint_wiki.py`](skills/llmwiki/scripts/lint_wiki.py) checks layout, metadata, frontmatter, hashes, duplicate slugs and wikilinks.
+- [`scripts/fetch_assets.py`](skills/llmwiki/scripts/fetch_assets.py) restores ignored caches (TeX archives, official repositories at the recorded commit) from `metadata.yaml`.
 - [`scripts/migrate_legacy.py`](skills/llmwiki/scripts/migrate_legacy.py) moves a legacy `papers/` tree to the canonical layout (dry run by default).
 
-There is no downloader, extractor, or semantic-reading validator; safe archive extraction is a requirement of the workflow, not an implemented utility.
+There is no general downloader for new papers, extractor, or semantic-reading validator; safe archive extraction is a requirement of the workflow, not an implemented utility.
 
 ## License
 
