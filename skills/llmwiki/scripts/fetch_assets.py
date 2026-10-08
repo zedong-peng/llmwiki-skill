@@ -109,6 +109,10 @@ def main():
         paper = meta.get("paper") or meta.get("reference") or {}
         for a in meta.get("assets") or []:
             path = a.get("path")
+            if a.get("generated"):
+                # Generated blog PDFs are tracked artifacts. Their
+                # source page URL is provenance, not a PDF download endpoint.
+                continue
             if a.get("kind") not in kinds or not path or path.endswith("/") or os.path.exists(os.path.join(ref, path)):
                 continue
             url = asset_url(a, paper)

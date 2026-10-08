@@ -1,23 +1,23 @@
 ---
 name: llmwiki
-description: Answer questions using an existing personal Markdown wiki, consulting index summaries first and original assets for missing details. Also use when the user asks to ingest academic papers or validate paper archives in llmwiki.
+description: Answer questions using an existing personal Markdown wiki, consulting index summaries first and original assets for missing details. Also use when the user asks to ingest academic papers or blogs, or validate reference archives in llmwiki.
 ---
 
 # LLM Wiki
 
-This skill primarily answers questions using an existing wiki. It also maintains paper archives and evidence-backed notes. It does not contain a personal wiki.
+This skill primarily answers questions using an existing wiki. It also maintains paper and other reference archives with evidence-backed notes. It does not contain a personal wiki.
 
 ## Before Starting
 
 1. Resolve the wiki root from the user's explicit path or the current workspace. Never assume a username or silently create a second wiki. Ask if ambiguous.
 2. Read the target wiki's `AGENTS.md` and relevant local instructions, then its index and topic index when present.
-3. Choose the workflow that matches the request: answer a wiki question, ingest a paper, or validate an archive. Questions use the query workflow by default.
+3. Choose the workflow that matches the request: answer a wiki question, ingest a paper or other reference, or validate an archive. Questions use the query workflow by default.
 
 ## Answer Wiki Questions
 
 1. Start with the wiki index and relevant topic `index.md` summaries. Follow their links to relevant reference `index.md` notes or topic records; use targeted search if navigation is incomplete.
 2. Answer from those summaries when they cover the question. Do not read every archived asset for an overview question.
-3. For details absent from the summaries, follow the note's asset links and metadata to the original local evidence. Read the relevant TeX section, PDF page or table, archived blog text, or repository file. Prefer TeX for paper text and consult PDF figures/layout when needed. Read enough surrounding context to interpret the detail correctly.
+3. For details absent from the summaries, follow the note's asset links and metadata to the original local evidence. Read the relevant TeX section, PDF page or table, archived blog PDF, or repository file. Prefer TeX for paper text and consult PDF figures/layout when needed. Read enough surrounding context to interpret the detail correctly.
 4. Cite the wiki notes used, and cite the original asset with a section, page, or file location when it supplies additional detail. Distinguish source claims, code observations, and your interpretation; if a summary conflicts with the original, explain the discrepancy.
 5. If the required evidence is missing or unreadable, state the gap rather than filling it from inference. Ordinary questions do not initiate ingestion, rewrite notes, or update navigation/logs; do those when requested.
 
@@ -35,6 +35,18 @@ Read [the protocol](references/protocol.md), the sole directory-layout specifica
 8. Update the topic index and the wiki's navigation according to local conventions; add a dated entry at the top of `wiki/log.md`. Do not create parallel indexes, guide pages or a second log.
 9. Check all referenced paths and links, hashes, identity/version, extraction boundaries, repository commit, and consistency between status and completed work.
 10. Report what was read, archived, and not reproduced. Do not claim automated validation or board execution unless actually performed.
+
+## Ingest Blogs and Other References
+
+Use this workflow for vendor blogs, release posts, documentation snapshots, and software references.
+
+1. Search for a corresponding paper by exact title, DOI, arXiv ID, and the author's canonical publication links. If a paper exists, ingest the paper as the primary reference; link the blog from its note and archive the blog only when it contains material needed to support a claim that the paper does not cover. Do not create duplicate notes for the same work.
+2. If no corresponding paper exists, treat the blog as a first-class non-paper reference. Use a `reference:` block in `metadata.yaml`, with `reference.type: blog` (or a more specific non-paper type), the canonical page URL, publication date, and a stable slug.
+3. Archive the blog as **one PDF** at `supplementary/<slug>.pdf`. Do not keep HTML, extracted text, screenshots, or a second textual copy as parallel canonical assets. The PDF must contain the article's figures and images, not only copied paragraph text.
+4. Save the page as a PDF that includes its figures and images. Keep only this PDF as the canonical blog asset; do not add parallel HTML, TXT, or screenshot copies.
+5. Record the source page in `reference.url` and the PDF asset's `source_url`, `generated: true`, `archive_method` (for example `website2pdf` or `manual_print`), `format: pdf`, byte count, SHA-256, and retrieval date. A generated PDF is a tracked archive, not something `fetch_assets.py` should recreate by downloading the web page.
+6. Read the PDF and write a note that separates vendor-reported claims, observed artifacts, any local checks, and interpretation. Record image/interactive-media boundaries and any page elements that did not render. Do not call an internal benchmark a reproducible public benchmark unless the data and procedure are available.
+7. Update the topic index and `wiki/log.md` using the same navigation and validation rules as paper ingestion.
 
 ## Validate Archives
 
