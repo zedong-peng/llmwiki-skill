@@ -44,7 +44,7 @@ def load_env_once() -> Optional[Path]:
 
     here = Path(__file__).resolve()
     # scripts/ -> paper-search/ -> llmwiki-collect/ -> skills/ -> repo root
-    ancestors = here.parents[:5]
+    ancestors = list(here.parents)[:5]
     candidates: list[Path] = []
     repo_root = ancestors[-1]
     for parent in ancestors:

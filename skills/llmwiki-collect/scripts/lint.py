@@ -35,7 +35,7 @@ def links(page, wiki, stems):
     text = page.read_text(errors="replace")
     text = re.sub(r"```.*?```|`[^`\n]*`", "", text, flags=re.S)
     for raw in WIKILINK.findall(text):
-        t = raw.strip().rstrip("/")
+        t = raw.strip().rstrip("\\").rstrip("/")  # [[x\|alias]] in tables
         hits = [b / t for b in (page.parent, wiki)]
         hits = [h for c in hits for h in (c, c.with_name(c.name + ".md")) if h.exists()]
         if not hits and "/" not in t and t in stems:
@@ -44,7 +44,7 @@ def links(page, wiki, stems):
     for raw in MDLINK.findall(text):
         if re.match(r"[a-z][a-z0-9+.-]*:|#", raw, re.I):
             continue
-        p = page.parent / raw.split("#")[0]
+        p = page.parent / raw.split("#")[0].strip("<>")
         yield f"({raw})", p.resolve() if p.exists() else None
 
 
