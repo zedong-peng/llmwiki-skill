@@ -1,0 +1,29 @@
+% Citation template for one llmwiki reference.
+% File: citation.bib next to note.md. Entry key MUST equal the
+% reference slug (directory name). One entry per file.
+%
+% Papers: use @article with eprint for arXiv. Pin the version in the
+% eprint suffix (e.g. 1234.56789v2).
+
+@article{<slug>,
+  author  = {Family, Given and Family2, Given2},
+  title   = {Paper Title},
+  journal = {Advances in Neural Information Processing Systems},
+  year    = {2024},
+  doi     = {10.xxxx/xxxxx},
+  eprint  = {1234.56789v2},
+}
+
+% Blogs, release posts, docs snapshots without a paper: use @online.
+% date is the publication day (day-level matters for blogs); urldate is
+% when you archived it (page content may change afterwards).
+% The archived PDF in paper-pdf/ is the canonical asset; the bib
+% url records provenance for re-download.
+
+% @online{<slug>,
+%   author  = {Author Name},
+%   title   = {Post Title},
+%   date    = {2025-03-14},
+%   url     = {https://example.com/post},
+%   urldate = {2026-10-09},
+% }
