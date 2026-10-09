@@ -15,7 +15,7 @@ import re
 import sys
 from pathlib import Path
 
-CACHE_DIRS = {"paper-pdf", "paper-tex", "github-repo", "supplementary", ".git"}
+CACHE_DIRS = {"paper-pdf", "paper-tex", "github-repo", ".git"}
 WIKILINK = re.compile(r"\[\[([^\]|#]+)")
 MDLINK = re.compile(r"\]\(([^)\s]+)\)")
 BIB_ENTRY = re.compile(r"^\s*@(\w+)\s*\{\s*([^,\s]+)\s*,", re.M)
