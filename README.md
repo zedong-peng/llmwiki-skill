@@ -48,6 +48,7 @@ Always supply the target wiki path when it is not clear from the workspace. Inst
 - [Search and retrieval](skills/llmwiki-collect/search.md)
 - [Paper search tools and authentication](skills/llmwiki-collect/paper-search/README.md)
 - [Layout template and invariants](skills/llmwiki-collect/scaffold-template.md)
+- [Layout lint](skills/llmwiki-collect/scripts/lint.py)
 - [Citation template](skills/llmwiki-collect/research-template/topic-template/assets/example-2000/citation.bib)
 - [Note template](skills/llmwiki-collect/research-template/topic-template/assets/example-2000/note.md)
 

@@ -25,3 +25,6 @@ wiki/research/<topic>/
 - `<slug>` is `<short-name>-<year>`, e.g. `amem-2025`; keep existing slugs.
 - Each slug exists once wiki-wide; other topics link to it.
 - Every reference directory is reachable from its topic index.
+- `code` in `citation.bib` is the repository URL, or `none` once verified absent;
+  omitted means unchecked.
+- `scripts/lint.py <wiki>` checks these invariants.
