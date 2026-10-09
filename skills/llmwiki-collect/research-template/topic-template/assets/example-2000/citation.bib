@@ -2,16 +2,18 @@
 % File: citation.bib next to note.md. Entry key MUST equal the
 % reference slug (directory name). One entry per file.
 %
-% Papers: use @article with eprint for arXiv. Pin the version in the
-% eprint suffix (e.g. 1234.56789v2).
+% Conference papers: @inproceedings with booktitle. Journal papers:
+% @article with journal. arXiv-only: @misc. Pin the arXiv version in
+% the eprint suffix (e.g. 1234.56789v2).
 
-@article{<slug>,
-  author  = {Family, Given and Family2, Given2},
-  title   = {Paper Title},
-  journal = {Advances in Neural Information Processing Systems},
-  year    = {2024},
-  doi     = {10.xxxx/xxxxx},
-  eprint  = {1234.56789v2},
+@inproceedings{<slug>,
+  author        = {Family, Given and Family2, Given2},
+  title         = {Paper Title},
+  booktitle     = {Advances in Neural Information Processing Systems},
+  year          = {2024},
+  doi           = {10.xxxx/xxxxx},
+  eprint        = {1234.56789v2},
+  archivePrefix = {arXiv},
 }
 
 % Blogs, release posts, docs snapshots without a paper: use @online.

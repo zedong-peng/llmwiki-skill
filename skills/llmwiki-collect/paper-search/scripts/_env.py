@@ -7,8 +7,12 @@ walks up from the script directory to find a .env and loads it into os.environ B
 connectors run — no external dependency (not python-dotenv), shell-set vars take precedence.
 
 Search order (first match wins):
-  1. .env in any ancestor directory of this script (scripts/ -> paper_search/ -> skills/ -> repo root)
-  2. any skills/<name>/.env under the repo root (keys currently live in skills/ResearchStudio-Idea/.env)
+  1. .env in an ancestor directory of this script, up to the repository root
+     (scripts/ -> paper-search/ -> llmwiki-collect/ -> skills/ -> repo root)
+  2. any skills/<name>/.env under the repository root
+
+The repository root is the nearest ancestor containing .git, and never above
+the directory that contains skills/, so an unrelated ~/.env is not picked up.
 """
 from __future__ import annotations
 import os
@@ -39,15 +43,16 @@ def load_env_once() -> Optional[Path]:
     _loaded = True
 
     here = Path(__file__).resolve()
+    # scripts/ -> paper-search/ -> llmwiki-collect/ -> skills/ -> repo root
+    ancestors = here.parents[:5]
     candidates: list[Path] = []
-    repo_root: Optional[Path] = None
-    for parent in here.parents:
+    repo_root = ancestors[-1]
+    for parent in ancestors:
         candidates.append(parent / ".env")
         if (parent / ".git").exists():
             repo_root = parent
             break
-    if repo_root is not None:
-        candidates += sorted(repo_root.glob("skills/*/.env"))
+    candidates += sorted(repo_root.glob("skills/*/.env"))
 
     for cand in candidates:
         try:

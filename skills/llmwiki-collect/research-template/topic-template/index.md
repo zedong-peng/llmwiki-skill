@@ -1,3 +1,3 @@
 # Topic Title
 
-References: [[assets/slug123_2000/note]].
+References: [[assets/example-2000/note]].

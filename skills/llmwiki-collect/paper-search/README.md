@@ -1,7 +1,7 @@
 # Paper Search Tools
 
 Vendored from [Microsoft ResearchStudio](https://github.com/microsoft/ResearchStudio),
-`ResearchStudio-Idea/skills/paper_search`. Search and authentication helpers;
+`ResearchStudio-Idea/skills/paper_search`, under its MIT [license](LICENSE). Search and authentication helpers;
 choose queries, sources, filtering, and presentation to fit the task.
 
 ## Search
@@ -29,8 +29,7 @@ The CLI has no `--json` option.
 
 Individual `scripts/search_papers_by_<source>.py` files also expose search CLIs
 (`--help`). The separate Google Scholar connector requires `scholarly` and is
-not included in the unified CLI. HTTP connectors require `requests`; OpenReview
-requires `openreview-py`.
+not included in the unified CLI. Dependencies: `pip install -r requirements.txt`.
 
 ## Authentication
 
@@ -41,7 +40,8 @@ requires `openreview-py`.
 - The standalone Google Scholar connector supports `SCRAPER_API_KEY`.
 
 The unified CLI loads the first `.env` found from the scripts directory up to
-the repository root, then checks `skills/*/.env`. Exported variables take precedence.
+the repository root, then `skills/*/.env`; it never looks above the repository.
+Exported variables take precedence.
 
 ## Download
 

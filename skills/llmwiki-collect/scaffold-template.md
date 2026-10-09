@@ -8,7 +8,7 @@ wiki/research/<topic>/
   threads/
     *.md                          # ideas, drafts
   assets/
-    <slug>_<year>/
+    <slug>/
       citation.bib                # key == dirname
       note.md                     # after reading only
       paper-pdf/
@@ -17,7 +17,11 @@ wiki/research/<topic>/
         archives/
           <original-download-filename>
         extracted/
-          <extraction-id>/
+          <archive-filename-without-extension>/
       github-repo/
         <original-repository-name>/
 ```
+
+- `<slug>` is `<short-name>-<year>`, e.g. `amem-2025`; keep existing slugs.
+- Each slug exists once wiki-wide; other topics link to it.
+- Every reference directory is reachable from its topic index.

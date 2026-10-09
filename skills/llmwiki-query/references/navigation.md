@@ -6,11 +6,11 @@ Read-only address map. Write spec lives in `llmwiki-collect`.
 wiki/research/<topic>/
   index.md            # topic summary and catalog
   threads/            # ideas, drafts, scratch notes
-  assets/<slug>_<year>/
+  assets/<slug>/
     citation.bib      # canonical citation; entry key == directory name
     note.md           # reading record; absent = no recorded reading
 ```
 
-- Slug unique wiki-wide; cross-topic = links, no duplicate archives.
+- Each reference is archived once; other topics link to it.
 - History: `wiki/log.md`, newest first.
 - Reading coverage comes from the note's contents, not the presence of downloaded files.
