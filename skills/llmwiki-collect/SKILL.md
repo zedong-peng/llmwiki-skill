@@ -18,6 +18,8 @@ Use the target wiki's AGENTS.md and existing conventions.
   adds evidence. Otherwise archive the blog as one PDF with images, no HTML/TXT copies.
 - Write `note.md` only after reading; separate paper claims, code observations,
   local reproduction, and interpretation.
+- Reference pages describe the source. Analysis for a particular project of the
+  user's goes in that project's thread, which links the references.
 - After ingestion, update the topic index and add an entry at the top of `wiki/log.md`.
 - Validation means checking the layout invariants; report, and fix only with approval.
 - Do not execute downloaded research code or its install/build scripts, upload
