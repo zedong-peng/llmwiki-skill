@@ -6,9 +6,12 @@ description: Ingest academic papers and blogs into a personal Markdown wiki, or 
 Use the target wiki's AGENTS.md and existing conventions.
 
 - Search as needed: [search tools](search.md).
-- Exclude a paper when it is arXiv-only (unpublished), has no code repository,
-  and is not from a major company or top research lab. Verify these conditions;
-  missing metadata alone does not establish them.
+- Floor: exclude arXiv-only papers with no code repository and no major-company or
+  top-lab affiliation. Verify; missing metadata alone does not establish these.
+- Above the floor, skip work the topic would not cite: claims its own evidence does
+  not support, or nothing beyond references already archived.
+- Report each skipped candidate with the reason. Flag a user-supplied reference
+  instead of skipping it, unless the user agrees.
 - Archive layout and invariants: [template](scaffold-template.md).
 - Archive the PDF when available, even if reading TeX.
 - A blog with a corresponding paper: archive the paper; link the blog only if it
