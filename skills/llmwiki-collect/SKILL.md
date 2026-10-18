@@ -20,7 +20,7 @@ Use the target wiki's AGENTS.md and existing conventions.
   local reproduction, and interpretation.
 - Reference pages describe the source. Analysis for a particular project of the
   user's goes in that project's thread, which links the references.
-- After ingestion, update the topic index and add an entry at the top of `wiki/log.md`.
+- After ingestion, update the topic index; the commit message is the log.
 - Validation means checking the layout invariants; report, and fix only with approval.
 - Do not execute downloaded research code or its install/build scripts, upload
   private material, or delete, commit, or publish wiki content without authorization.

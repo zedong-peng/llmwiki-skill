@@ -12,6 +12,6 @@ wiki/research/<topic>/
 ```
 
 - Each reference is archived once; other topics link to it.
-- History: `wiki/log.md`, newest first.
+- History: `git log`; the wiki keeps no log file.
 - Bib `code`: repository URL, `none` = verified absent, omitted = unchecked.
 - Reading coverage comes from the note's contents, not the presence of downloaded files.
